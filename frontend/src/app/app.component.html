@@ -13,12 +13,22 @@
         <label for="viewSelectedCourse" class="form-check-label">Προβολή Επιλεγμένων</label>
       </div>
       
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="sorting">
-        <option value="1">Εξάμηνα</option>
-        <option value="2">Χειμερινό / Εαρινό</option>
-        <option value="3">Κύκλοι Σπουδών</option>
-        <option value="4">Επιλεγμένοι Κύκλοι Σπουδών</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="sorting" (ngModelChange)="onSortingChange()">
+        <option value="0">Εξάμηνα</option>
+        <option value="1">Χειμερινό / Εαρινό</option>
+        <option value="2">Κύκλοι Σπουδών</option>
+        <option value="3">Επιλεγμένοι Κύκλοι Σπουδών</option>
       </select>
+
+    </div>
+
+    <p style="color: white;">Sorting: {{this.sorting}}</p>
+
+    <div class="courses-container" *ngFor="let section of filterService.filters[this.sorting].sections">
+      <p style="color: var(--bs-primary)" class="container-title">{{ section.name }}</p>
+      <ng-container *ngFor="let course of getValues(this.dataService.data)">
+        <p *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">{{course.title}}</p>
+      </ng-container>
 
     </div>
 
