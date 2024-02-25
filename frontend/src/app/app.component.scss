@@ -30,6 +30,16 @@ main {
     max-width: 18em;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    color: white;
+    padding: 0.2em;
+    border: 0.5px solid grey;
+}
+
 [data-bs-theme="dark"] {
     main {
         background-color: var(--bs-dark);

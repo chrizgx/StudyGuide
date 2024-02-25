@@ -26,9 +26,23 @@
 
     <div class="courses-container" *ngFor="let section of filterService.filters[this.sorting].sections">
       <p style="color: var(--bs-primary)" class="container-title">{{ section.name }}</p>
-      <ng-container *ngFor="let course of getValues(this.dataService.data)">
-        <p *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">{{course.title}}</p>
-      </ng-container>
+      <table class="table table-bordered" data-bs-theme="dark">
+        <tr>
+          <th>ID</th>
+          <th *ngIf="this.sorting != 0">Εξ.</th>
+          <th>Τίτλος</th>
+          <!-- <th>Κύκλος Σπουδών</th> -->
+          <!-- <th>Προαπαιτούμενα</th> -->
+        </tr>
+        <ng-container *ngFor="let course of getValues(this.dataService.data)">
+          <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
+            <td>{{course.id}}</td>
+            <td *ngIf="this.sorting != 0">{{course.semester}}</td>
+            <td>{{course.title}}</td>
+            <!-- <td>{{" "}}</td> -->
+          </tr>
+        </ng-container>
+      </table>
 
     </div>
 
