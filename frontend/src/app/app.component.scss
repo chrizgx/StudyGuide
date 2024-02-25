@@ -1,0 +1,41 @@
+.body-simulator {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+nav {
+    background-color: var(--bs-primary);
+    color: white;
+    padding: 0.75em;
+}
+
+main {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1em;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filter-container > select {
+    max-width: 18em;
+}
+
+[data-bs-theme="dark"] {
+    main {
+        background-color: var(--bs-dark);
+    }
+
+    label {
+        color: white;
+    }
+}

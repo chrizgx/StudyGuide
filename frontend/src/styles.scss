@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 :root {
     --bs-primary: #762124;
     --bs-primary-rgb: 118, 33, 36;
 }
 
-@import '~bootstrap/scss/bootstrap';
+body, html, app-root {
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+}
