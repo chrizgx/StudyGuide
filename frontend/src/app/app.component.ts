@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DataService } from './services/data.service';
 import { FilterService } from './services/filter.service';
@@ -11,7 +12,7 @@ import { Course } from './models/course.model';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [CommonModule, RouterOutlet, FormsModule, NgbModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -41,6 +42,21 @@ export class AppComponent {
   getValues(object: any): Course[] {
     console.log(Object.values(object)[1]);
     return Object.values(object);
+  }
+
+  getModuleNames(modules: number[] | null): string {
+    if (modules === null) {
+      return "";
+    }
+    
+    let moduleNames = "";
+    for (let i = 0; i < this.filterService.filters[2].sections.length; i++) {
+      if (modules.includes(this.filterService.filters[2].sections[i].filterValue)) {
+        moduleNames += this.filterService.filters[2].sections[i].name + ",\n";
+      }
+    }
+
+    return moduleNames.slice(0, -3);
   }
 
 }

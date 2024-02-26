@@ -30,16 +30,18 @@
         <tr>
           <th>ID</th>
           <th *ngIf="this.sorting != 0">Εξ.</th>
+          <th *ngIf="this.sorting == 2">Εποχή</th>
           <th>Τίτλος</th>
-          <!-- <th>Κύκλος Σπουδών</th> -->
+          <th>Κύκλος Σπουδών</th>
           <!-- <th>Προαπαιτούμενα</th> -->
         </tr>
         <ng-container *ngFor="let course of getValues(this.dataService.data)">
           <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
             <td>{{course.id}}</td>
             <td *ngIf="this.sorting != 0">{{course.semester}}</td>
+            <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
             <td>{{course.title}}</td>
-            <!-- <td>{{" "}}</td> -->
+            <td [ngbTooltip]="getModuleNames(course.category)">{{course.category != null ? course.category.join(", ") : course.type == "obligatory" ? "Κορμός" : "-"}}</td>
           </tr>
         </ng-container>
       </table>
