@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course.model';
+import { CourseRecord } from '../models/course-record.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  records: { [key: string]: CourseRecord } = {
+
+  }
 
   data: { [key: string]: Course } = {
       "c3117": {

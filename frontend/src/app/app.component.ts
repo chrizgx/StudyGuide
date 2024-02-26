@@ -8,6 +8,7 @@ import { DataService } from './services/data.service';
 import { FilterService } from './services/filter.service';
 
 import { Course } from './models/course.model';
+import { CourseRecord } from './models/course-record.model';
 
 @Component({
   selector: 'app-root',
@@ -57,6 +58,23 @@ export class AppComponent {
     }
 
     return moduleNames.slice(0, -2);
+  }
+
+  isCategorySelected(category: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, courseId: string): boolean {
+    let record: CourseRecord = this.dataService.records[courseId];
+    return record != null ? record.category === category : false;
+  }
+
+  selectCategory(category: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, courseId: string): void {
+    let record: CourseRecord = this.dataService.records[courseId];
+    // If null, create record inside records
+    if (record == null) {
+      record = { id: this.dataService.data[courseId].id, grade: 0, selected: false, category: category };
+      this.dataService.records[courseId] = record;
+      return;
+    }
+    // If not null, change category
+    record.category = record.category === category ? null : category;
   }
 
 }
