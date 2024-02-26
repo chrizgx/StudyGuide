@@ -28,16 +28,7 @@ export class AppComponent {
   section: any = {};
 
   ngOnInit() {
-    this.getSection();
-  }
-
-  getSection() {
-    // this.section = this.filterService.filters[this.sorting];
-  }
-
-  onSortingChange() {
-    this.getSection();
-    console.log(this.sorting);
+    
   }
 
   getValues(object: any): Course[] {
