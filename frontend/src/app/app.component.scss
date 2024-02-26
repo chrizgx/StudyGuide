@@ -32,12 +32,18 @@ main {
 
 table {
     border-collapse: collapse;
+    border: 0.5px solid #392e30;
+}
+
+th {
+    background-color: #261e1c;
 }
 
 th, td {
     color: white;
-    padding: 0.2em;
-    border: 0.5px solid grey;
+    padding: 0.8em;
+    border-top: 0.5px solid #392e30;
+    border-bottom: 0.5px solid #392e30;
 }
 
 [data-bs-theme="dark"] {

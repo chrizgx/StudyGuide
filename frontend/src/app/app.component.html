@@ -1,5 +1,5 @@
 <!-- <router-outlet /> -->
-<div class="body-simulator" data-bs-theme="dark">
+<div class="body-simulator">
   <nav>
     <span>Πρόγραμμα Σπουδών Πληροφορικής 2023-2024</span>
   </nav>
@@ -26,7 +26,7 @@
 
     <div class="courses-container" *ngFor="let section of filterService.filters[this.sorting].sections">
       <p style="color: var(--bs-primary)" class="container-title">{{ section.name }}</p>
-      <table class="table table-bordered" data-bs-theme="dark">
+      <table class="table" data-bs-theme="dark">
         <tr>
           <th>ID</th>
           <th *ngIf="this.sorting != 0">Εξ.</th>

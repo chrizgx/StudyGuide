@@ -56,7 +56,7 @@ export class AppComponent {
       }
     }
 
-    return moduleNames.slice(0, -3);
+    return moduleNames.slice(0, -2);
   }
 
 }
