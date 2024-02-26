@@ -37,7 +37,7 @@
           <!-- <th>Προαπαιτούμενα</th> -->
         </tr>
         <ng-container *ngFor="let course of getValues(this.dataService.data)">
-          
+          <ng-container *ngIf="viewSelectedCourses == false || isCourseSelected('c'+course.id)">
             <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
               <td><input type="checkbox" class="form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
               <td>{{course.id}}</td>
@@ -51,7 +51,7 @@
                 <ng-container *ngIf="course.category == null || course.category == []">Κορμός</ng-container>
               </td>
             </tr>
-            
+          </ng-container>
         </ng-container>
       </table>
 
