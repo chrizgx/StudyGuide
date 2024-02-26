@@ -14,3 +14,23 @@ body, html, app-root {
     padding: 0;
 
 }
+
+.tooltip {
+    background-color: var(--bs-primary) !important;
+    color: white;
+}
+
+.tooltip.show {
+    opacity: 1 !important;
+}
+
+.tooltip-inner {
+    background-color: var(--bs-primary) !important;
+    color: white;
+}
+
+.tooltip-arrow {
+    background-color: var(--bs-primary) !important;
+    bottom: 0 !important;
+    display: none !important;
+}
