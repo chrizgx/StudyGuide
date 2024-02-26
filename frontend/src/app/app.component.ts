@@ -68,7 +68,7 @@ export class AppComponent {
   selectCategory(category: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, courseId: string): void {
     let record: CourseRecord = this.dataService.records[courseId];
     // If null, create record inside records
-    if (record == null) {
+    if (record == undefined) {
       record = { id: this.dataService.data[courseId].id, grade: 0, selected: false, category: category };
       this.dataService.records[courseId] = record;
       return;
