@@ -19,6 +19,16 @@ body, html, app-root {
 
 }
 
+.form-check-input:checked {
+    background-color: var(--bs-primary);
+    border-color: #261e1c;
+}
+
+.form-check-input:focus, .form-check-input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .tooltip {
     background-color: var(--bs-primary) !important;
     color: white;

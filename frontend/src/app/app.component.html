@@ -39,7 +39,7 @@
         <ng-container *ngFor="let course of getValues(this.dataService.data)">
           
             <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
-              <td><input type="checkbox" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
+              <td><input type="checkbox" class="form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
               <td>{{course.id}}</td>
               <td *ngIf="this.sorting != 0">{{course.semester}}</td>
               <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
