@@ -13,7 +13,7 @@
         <label for="viewSelectedCourse" class="form-check-label">Προβολή Επιλεγμένων</label>
       </div>
       
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="sorting" (ngModelChange)="onSortingChange()">
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="sorting">
         <option value="0">Εξάμηνα</option>
         <option value="1">Χειμερινό / Εαρινό</option>
         <option value="2">Κύκλοι Σπουδών</option>
@@ -25,9 +25,10 @@
     <p style="color: white;">Sorting: {{this.sorting}}</p>
 
     <div class="courses-container" *ngFor="let section of filterService.filters[this.sorting].sections">
-      <p style="color: var(--bs-primary)" class="container-title">{{ section.name }}</p>
+      <p class="container-title">{{ section.name }}</p>
       <table class="table" data-bs-theme="dark">
         <tr>
+          <th></th>
           <th>ID</th>
           <th *ngIf="this.sorting != 0">Εξ.</th>
           <th *ngIf="this.sorting == 2">Εποχή</th>
@@ -36,18 +37,21 @@
           <!-- <th>Προαπαιτούμενα</th> -->
         </tr>
         <ng-container *ngFor="let course of getValues(this.dataService.data)">
-          <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
-            <td>{{course.id}}</td>
-            <td *ngIf="this.sorting != 0">{{course.semester}}</td>
-            <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
-            <td>{{course.title}}</td>
-            <td [ngbTooltip]="getModuleNames(course.category)">
-              <ng-container *ngIf="course.category != null">
-                <span *ngFor="let category of course.category" class="module-button" [ngClass]="{'module-button-active': this.isCategorySelected(category, 'c'+course.id)}" (click)="this.selectCategory(category, 'c'+course.id)">{{category}}</span>
-              </ng-container>
-              <ng-container *ngIf="course.category == null || course.category == []">Κορμός</ng-container>
-            </td>
-          </tr>
+          
+            <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
+              <td><input type="checkbox" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
+              <td>{{course.id}}</td>
+              <td *ngIf="this.sorting != 0">{{course.semester}}</td>
+              <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
+              <td>{{course.title}}</td>
+              <td [ngbTooltip]="getModuleNames(course.category)">
+                <ng-container *ngIf="course.category != null">
+                  <span *ngFor="let category of course.category" class="module-button" [ngClass]="{'module-button-active': this.isCategorySelected(category, 'c'+course.id)}" (click)="this.selectCategory(category, 'c'+course.id)">{{category}}</span>
+                </ng-container>
+                <ng-container *ngIf="course.category == null || course.category == []">Κορμός</ng-container>
+              </td>
+            </tr>
+            
         </ng-container>
       </table>
 

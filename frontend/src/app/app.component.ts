@@ -31,8 +31,12 @@ export class AppComponent {
     
   }
 
+  consoleLog(value: string) {
+    console.log(value);
+  }
+
   getValues(object: any): Course[] {
-    console.log(Object.values(object)[1]);
+    // console.log(Object.values(object)[1]);
     return Object.values(object);
   }
 
@@ -68,4 +72,20 @@ export class AppComponent {
     record.category = record.category === category ? null : category;
   }
 
+  isCourseSelected(courseId: string): boolean {
+    let record: CourseRecord = this.dataService.records[courseId];
+    return record != undefined ? record.selected : false;
+  }
+
+  selectCourse(courseId: string): void {
+    let record: CourseRecord = this.dataService.records[courseId];
+    // If null, create record inside records
+    if (record == undefined) {
+      record = { id: this.dataService.data[courseId].id, grade: 0, selected: true, category: null };
+      this.dataService.records[courseId] = record;
+      return;
+    }
+    // If not null, change selected
+    record.selected = !record.selected;
+  }
 }
