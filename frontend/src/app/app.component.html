@@ -32,6 +32,7 @@
           <th>ID</th>
           <th *ngIf="this.sorting != 0">Εξ.</th>
           <th *ngIf="this.sorting == 2">Εποχή</th>
+          <th>Βαθμός</th>
           <th>Τίτλος</th>
           <th>Κύκλος Σπουδών</th>
           <!-- <th>Προαπαιτούμενα</th> -->
@@ -43,6 +44,7 @@
               <td>{{course.id}}</td>
               <td *ngIf="this.sorting != 0">{{course.semester}}</td>
               <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
+              <td (click)="openGradeModal('c'+course.id)">{{getCourseGrade('c'+course.id) != 0 ? dataService.records['c'+course.id].grade : "+"}}</td>
               <td>{{course.title}}</td>
               <td [ngbTooltip]="getModuleNames(course.category)">
                 <ng-container *ngIf="course.category != null">
@@ -60,4 +62,20 @@
 
   </main>
 
+  <!-- Vertically centered modal -->
+  <ng-template #gradeModal let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title">Καταγραφή Βαθμολογίας</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{gradeModalConfiguration.courseName}}</p>
+          <label for="gradeRange" class="form-label">Βαθμολογία: {{gradeModalConfiguration.courseGrade}}</label>
+          <input type="range" class="form-range" min="0" max="10" step="0.5" id="gradeRange" [(ngModel)]="gradeModalConfiguration.courseGrade">
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button> -->
+          <button type="button" class="btn btn-primary">Καταχώρηση</button>
+        </div>
+  </ng-template>
 </div>

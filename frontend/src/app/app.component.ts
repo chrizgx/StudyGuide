@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from './services/data.service';
 import { FilterService } from './services/filter.service';
 
+import { ViewChild, ElementRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { Course } from './models/course.model';
 import { CourseRecord } from './models/course-record.model';
 
@@ -18,14 +21,21 @@ import { CourseRecord } from './models/course-record.model';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  @ViewChild('gradeModal') gradeModal!: ElementRef;
 
   dataService: DataService = inject(DataService);
   filterService: FilterService = inject(FilterService);
+  modalService: NgbModal = inject(NgbModal);
 
   title = 'frontend';
   viewSelectedCourses: boolean = false;
   sorting: 0 | 1 | 2 | 3 = 0;
   section: any = {};
+  gradeModalConfiguration: any = {
+    courseName: "",
+    courseId: "",
+    courseGrade: 0,
+  }
 
   ngOnInit() {
     
@@ -87,5 +97,19 @@ export class AppComponent {
     }
     // If not null, change selected
     record.selected = !record.selected;
+  }
+
+  getCourseGrade(courseId: string): number {
+    let record: CourseRecord = this.dataService.records[courseId];
+    return record != undefined ? record.grade : 0;
+  }
+
+  openGradeModal(courseId: string): void {
+    this.gradeModalConfiguration.courseName = this.dataService.data[courseId].title;
+    this.gradeModalConfiguration.courseId = courseId;
+    this.gradeModalConfiguration.courseGrade = this.getCourseGrade(courseId);
+
+    this.modalService.open(this.gradeModal, {centered: true, container: 'app-root'});
+
   }
 }
