@@ -97,7 +97,7 @@
         <p (click)="openGradeModal('c'+conf.course.id)">Βαθμός: {{getCourseGrade('c'+conf.course.id) != 0 ? dataService.records['c'+conf.course.id].grade : "+"}}</p>
 
         <!-- Requirements Table -->
-        
+
       </div>
     </ng-container>
   </ng-template>
@@ -114,7 +114,7 @@
   </ng-template>
 
   <ng-template #requirementsTooltipTemplate let-courses="courses">
-    <p *ngFor="let course of courses">{{course}}</p>
+    <p *ngFor="let course of courses">{{course.id}} {{course.title}}</p>
   </ng-template>
 
   <ng-template #ectsPopoverTemplate>

@@ -158,13 +158,13 @@ export class AppComponent {
     this.offcanvasService.open(this.courseOffcanvas, {position: 'end', animation: true, injector: Injector.create({providers: [{provide: 'conf', useValue: this.courseOffcanvasConfiguration}]})});
   }
 
-  getCourseRequirements(courseId: string): string[] {
+  getCourseRequirements(courseId: string): Course[] {
     if (this.dataService.data[courseId] === null) return [];
-    let data: string[] = []
+    let data: Course[] = []
     let requirements = this.dataService.data[courseId].requirements;
     for (let i = 0; i < requirements.length; i++) {
       let course = this.dataService.data["c"+requirements[i]];
-      data.push(course.id + " " + course.title);
+      data.push(course);
     }
 
     return data;
