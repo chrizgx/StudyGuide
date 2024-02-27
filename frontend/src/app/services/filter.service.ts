@@ -43,13 +43,13 @@ export class FilterService {
       ],
     },
 
-    {
-      name: "Επιλεγμένοι Κύκλοι Σπουδών",
-      sections: [
-        { name: "DEMO", },
-        { name: "DEMO" },
-      ],
-    }
+    // {
+    //   name: "Επιλεγμένοι Κύκλοι Σπουδών",
+    //   sections: [
+    //     { name: "DEMO", },
+    //     { name: "DEMO" },
+    //   ],
+    // }
   ];
 
   constructor() { }
