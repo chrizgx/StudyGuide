@@ -5,7 +5,10 @@
     --bs-primary: #762124;
     --bs-primary-rgb: 118, 33, 36;
     --bs-background: #171111;
-    --bs-body-bg: #171111;
+    --bs-body-bg: #171111 !important;
+    --bs-secondary-bg: #261e1c;
+    --bs-secondary-color: #ffffff;
+    --bs-border-color-translucent: #392e30;
     --bs-body-color: #ffffff;
     --bs-text: #ffffff;
 }
