@@ -99,7 +99,7 @@
         <!-- Requirements Table -->
         <table *ngIf="getCourseRequirements(conf.courseId) as requirements" class="table">
           <tr>
-            <td>Προαπαιτούμενα</td>
+            <td colspan="2" class="text-center">Προαπαιτούμενα</td>
           </tr>
           <tr>
             <th>ID</th>
@@ -108,6 +108,23 @@
           <tr *ngFor="let requirement of requirements">
             <td>{{requirement.id}}</td>
             <td [ngbTooltip]="isMeetingRequirements('c'+requirement.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+requirement.id)}" container="body" [class.course-pass]="getCourseGrade('c'+requirement.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+requirement.id)">{{requirement.title}}</td>
+          </tr>
+        </table>
+
+        <!-- Needed by Table -->
+        <table *ngIf="getCoursesNeededBy(conf.courseId) as dependencies" class="table">
+          <tr>
+            <td colspan="3" class="text-center">Εξαρτώμενα Μαθήματα</td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Εξ.</th>
+            <th>Τίτλος</th>
+          </tr>
+          <tr *ngFor="let dependency of dependencies">
+            <td>{{dependency.id}}</td>
+            <td>{{dependency.semester}}</td>
+            <td [ngbTooltip]="isMeetingRequirements('c'+dependency.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+dependency.id)}" container="body" [class.course-pass]="getCourseGrade('c'+dependency.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+dependency.id)">{{dependency.title}}</td>
           </tr>
         </table>
       </div>
