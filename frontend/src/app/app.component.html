@@ -97,7 +97,19 @@
         <p (click)="openGradeModal('c'+conf.course.id)">Βαθμός: {{getCourseGrade('c'+conf.course.id) != 0 ? dataService.records['c'+conf.course.id].grade : "+"}}</p>
 
         <!-- Requirements Table -->
-
+        <table *ngIf="getCourseRequirements(conf.courseId) as requirements" class="table">
+          <tr>
+            <td>Προαπαιτούμενα</td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Τίτλος</th>
+          </tr>
+          <tr *ngFor="let requirement of requirements">
+            <td>{{requirement.id}}</td>
+            <td [ngbTooltip]="isMeetingRequirements('c'+requirement.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+requirement.id)}" container="body" [class.course-pass]="getCourseGrade('c'+requirement.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+requirement.id)">{{requirement.title}}</td>
+          </tr>
+        </table>
       </div>
     </ng-container>
   </ng-template>
