@@ -29,6 +29,7 @@ export class AppComponent {
 
   title = 'frontend';
   viewSelectedCourses: boolean = false;
+  viewEcts: boolean = false;
   sorting: 0 | 1 | 2 | 3 = 0;
   section: any = {};
   gradeModalConfiguration: any = {
@@ -43,6 +44,18 @@ export class AppComponent {
 
   consoleLog(value: string) {
     console.log(value);
+  }
+
+  getTotalEcts(): number {
+    let ects = 0;
+    for (let key in this.dataService.records) {
+      let record = this.dataService.records[key];
+      if (record.selected) {
+        ects += this.dataService.data[key].ects;
+      }
+    }
+
+    return ects;
   }
 
   getValues(object: any): Course[] {

@@ -12,6 +12,10 @@
         <input type="checkbox" class="form-check-input" id="viewSelectedCourses" [(ngModel)]="viewSelectedCourses">
         <label for="viewSelectedCourse" class="form-check-label">Προβολή Επιλεγμένων</label>
       </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="viewEcts" [(ngModel)]="viewEcts">
+        <label for="viewEcts" class="form-check-label">Προβολή ECTS</label>
+      </div>
       
       <select class="form-select" aria-label="Default select example" [(ngModel)]="sorting">
         <option value="0">Εξάμηνα</option>
@@ -30,6 +34,7 @@
         <tr>
           <th></th>
           <th>ID</th>
+          <th *ngIf="viewEcts">ECTS</th>
           <th *ngIf="this.sorting != 0">Εξ.</th>
           <th *ngIf="this.sorting == 2">Εποχή</th>
           <th>Βαθμός</th>
@@ -42,6 +47,7 @@
             <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
               <td><input type="checkbox" class="form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
               <td>{{course.id}}</td>
+              <td *ngIf="viewEcts" class="ects">{{course.ects}}</td>
               <td *ngIf="this.sorting != 0">{{course.semester}}</td>
               <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
               <td class="grade" [class.no-grade-course]="getCourseGrade('c'+course.id) == 0" (click)="openGradeModal('c'+course.id)">{{getCourseGrade('c'+course.id) != 0 ? dataService.records['c'+course.id].grade : "+"}}</td>
@@ -77,5 +83,17 @@
           <!-- <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button> -->
           <button type="button" class="btn btn-primary" (click)="setCourseGrade(gradeModalConfiguration.courseId, gradeModalConfiguration.courseGrade); modal.dismiss('Cross click')">Καταχώρηση</button>
         </div>
+  </ng-template>
+
+  <div *ngIf="viewEcts" class="ects-counter-container" [ngbTooltip]="ectsTooltipTemplate" tooltipClass="ects-tooltip">
+    <span>ECTS: {{getTotalEcts()}}</span>
+  </div>
+
+  <ng-template #ectsTooltipTemplate>
+    Year / ECTS <br>
+    1 -> 38 ECTS<br>
+    2 -> 46 ECTS<br>
+    3 -> 54 ECTS<br>
+    4+ -> 60 ECTS<br>
   </ng-template>
 </div>
