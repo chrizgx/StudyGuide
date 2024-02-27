@@ -123,4 +123,33 @@ export class AppComponent {
     this.modalService.open(this.gradeModal, {centered: true, container: 'app-root'});
 
   }
+
+  getCourseRequirements(courseId: string): string[] {
+    if (this.dataService.data[courseId] === null) return [];
+    let data: string[] = []
+    let requirements = this.dataService.data[courseId].requirements;
+    for (let i = 0; i < requirements.length; i++) {
+      let course = this.dataService.data[requirements[i]];
+      data.push(course.id + " " + course.title);
+    }
+
+    return data;
+  }
+
+  // The course needs to meet at least one of the requirements
+  isMeetingRequirements(courseId: string): boolean {
+    if (this.dataService.data[courseId] === null) return false;
+    console.log("CHECK");
+
+    let requirements = this.dataService.data[courseId].requirements;
+    if (requirements.length === 0) return true;
+    for (let i = 0; i < requirements.length; i++) {
+      let record: CourseRecord = this.dataService.records['c'+requirements[i]];
+      if (record != undefined && record.grade >= 5) return true;
+    }
+
+    return false;
+  }
+
+
 }
