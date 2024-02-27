@@ -37,6 +37,10 @@ export class AppComponent {
     courseId: "",
     courseGrade: 0,
   }
+  ectsPopover: any = {
+    ects: [38, 46, 54, 60],
+    option: 0
+  }
 
   ngOnInit() {
     

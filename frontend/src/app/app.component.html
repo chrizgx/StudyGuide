@@ -85,8 +85,9 @@
         </div>
   </ng-template>
 
-  <div *ngIf="viewEcts" class="ects-counter-container" [ngbTooltip]="ectsTooltipTemplate" tooltipClass="ects-tooltip">
-    <span>ECTS: {{getTotalEcts()}}</span>
+  <div *ngIf="viewEcts" class="ects-counter-container" [ngbPopover]="ectsPopoverTemplate" popoverClass="ects-popover" popoverTitle="Μετρητής ECTS" triggers="click" [autoClose]="'outside'">
+    <span *ngIf="ectsPopover.option != 0" [class.ects-limit]="getTotalEcts() > ectsPopover.ects[ectsPopover.option-1]">ECTS: {{getTotalEcts()}} / {{ectsPopover.ects[ectsPopover.option-1]}}</span>
+    <span *ngIf="ectsPopover.option == 0">Επιλέξτε έτος σπουδών</span>
   </div>
 
   <ng-template #moduleTooltipTemplate let-modules="modules">
@@ -95,11 +96,30 @@
     </ng-container>
   </ng-template>
 
-  <ng-template #ectsTooltipTemplate>
-    Year / ECTS <br>
+  <ng-template #ectsPopoverTemplate>
+    Εργαλείο για την μέτρηση ECTS που επιτρέπεται να δηλωθεί ανα εξάμηνο, με βάση το έτος σπουδών.
+    <div style="display: flex; justify-content: space-between;">
+      <div>
+        <input type="radio" id="option1" name="ectsOption" value="1" [(ngModel)]="ectsPopover.option">
+        <label for="option1">1</label>
+      </div>
+      <div>
+        <input type="radio" id="option2" name="ectsOption" value="2" [(ngModel)]="ectsPopover.option">
+        <label for="option2">2</label>
+      </div>
+      <div>
+        <input type="radio" id="option3" name="ectsOption" value="3" [(ngModel)]="ectsPopover.option">
+        <label for="option3">3</label>
+      </div>
+      <div>
+        <input type="radio" id="option4" name="ectsOption" value="4" [(ngModel)]="ectsPopover.option">
+        <label for="option4">4+</label>
+      </div>
+    </div>
+    <!-- Year / ECTS <br>
     1 -> 38 ECTS<br>
     2 -> 46 ECTS<br>
     3 -> 54 ECTS<br>
-    4+ -> 60 ECTS<br>
+    4+ -> 60 ECTS<br> -->
   </ng-template>
 </div>

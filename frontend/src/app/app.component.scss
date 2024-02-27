@@ -24,10 +24,14 @@ main {
     background-color: black;
     color: var(--bs-warning);
     position: fixed;
-    top: 20px;
-    right: 0;
+    top: 0px;
+    right: 0px;
     padding: 0.75rem;
     border: 1px solid #392e30;
+}
+
+.ects-limit {
+    color: var(--bs-danger);
 }
 
 .filter-container {
