@@ -52,7 +52,9 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    
+    setTimeout(() => {
+      this.openCourseOffcanvas('c3335');
+    }, 1000);
   }
 
   consoleLog(value: string) {
@@ -158,8 +160,8 @@ export class AppComponent {
     this.offcanvasService.open(this.courseOffcanvas, {position: 'end', animation: true, injector: Injector.create({providers: [{provide: 'conf', useValue: this.courseOffcanvasConfiguration}]})});
   }
 
-  getCourseRequirements(courseId: string): Course[] {
-    if (this.dataService.data[courseId] === null) return [];
+  getCourseRequirements(courseId: string): Course[] | null {
+    if (this.dataService.data[courseId] === null) return null;
     let data: Course[] = []
     let requirements = this.dataService.data[courseId].requirements;
     for (let i = 0; i < requirements.length; i++) {
@@ -167,7 +169,7 @@ export class AppComponent {
       data.push(course);
     }
 
-    return data;
+    return data.length > 0 ? data : null;
   }
 
   // The course needs to meet at least one of the requirements
