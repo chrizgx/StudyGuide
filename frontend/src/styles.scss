@@ -48,7 +48,7 @@ input[type='range']::-webkit-slider-thumb {
   }
 
 .tooltip {
-    background-color: var(--bs-primary) !important;
+    background-color: black !important;
     color: white;
 }
 
@@ -57,12 +57,12 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .tooltip-inner {
-    background-color: var(--bs-primary) !important;
+    background-color: black !important;
     color: white;
 }
 
 .tooltip-arrow {
-    background-color: var(--bs-primary) !important;
+    background-color: black !important;
     bottom: 0 !important;
     display: none !important;
 }
