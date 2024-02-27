@@ -63,19 +63,19 @@ export class AppComponent {
     return Object.values(object);
   }
 
-  getModuleNames(modules: number[] | null): string {
+  getModuleNames(modules: number[] | null): string[] | null {
     if (modules === null) {
-      return "";
+      return null;
     }
     
-    let moduleNames = "";
+    let moduleNames: string[] = [];
     for (let i = 0; i < this.filterService.filters[2].sections.length; i++) {
       if (modules.includes(this.filterService.filters[2].sections[i].filterValue)) {
-        moduleNames += this.filterService.filters[2].sections[i].name + ",\n";
+        moduleNames.push(this.filterService.filters[2].sections[i].name);
       }
     }
-
-    return moduleNames.slice(0, -2);
+    console.log(moduleNames);
+    return moduleNames;
   }
 
   isCategorySelected(category: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, courseId: string): boolean {
