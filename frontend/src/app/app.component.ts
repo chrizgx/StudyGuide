@@ -146,7 +146,7 @@ export class AppComponent {
     let data: string[] = []
     let requirements = this.dataService.data[courseId].requirements;
     for (let i = 0; i < requirements.length; i++) {
-      let course = this.dataService.data[requirements[i]];
+      let course = this.dataService.data["c"+requirements[i]];
       data.push(course.id + " " + course.title);
     }
 
