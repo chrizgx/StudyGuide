@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Injector, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { FilterService } from './services/filter.service';
 
 import { ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
 import { Course } from './models/course.model';
 import { CourseRecord } from './models/course-record.model';
@@ -22,10 +23,12 @@ import { CourseRecord } from './models/course-record.model';
 })
 export class AppComponent {
   @ViewChild('gradeModal') gradeModal!: ElementRef;
+  @ViewChild('courseOffcanvas') courseOffcanvas!: ElementRef;
 
   dataService: DataService = inject(DataService);
   filterService: FilterService = inject(FilterService);
   modalService: NgbModal = inject(NgbModal);
+  offcanvasService: NgbOffcanvas = inject(NgbOffcanvas);
 
   title = 'frontend';
   viewSelectedCourses: boolean = false;
@@ -37,6 +40,12 @@ export class AppComponent {
     courseId: "",
     courseGrade: 0,
   }
+  courseOffcanvasConfiguration: any = {
+    courseId: null,
+    course: null,
+    record: null,
+  }
+
   ectsPopover: any = {
     ects: [38, 46, 54, 60],
     option: 0
@@ -139,6 +148,14 @@ export class AppComponent {
 
     this.modalService.open(this.gradeModal, {centered: true, container: 'app-root'});
 
+  }
+
+  openCourseOffcanvas(courseId: string): void {
+    this.courseOffcanvasConfiguration.courseId = courseId;
+    this.courseOffcanvasConfiguration.course = this.dataService.data[courseId];
+    this.courseOffcanvasConfiguration.record = this.dataService.records[courseId];
+
+    this.offcanvasService.open(this.courseOffcanvas, {position: 'end', animation: true, injector: Injector.create({providers: [{provide: 'conf', useValue: this.courseOffcanvasConfiguration}]})});
   }
 
   getCourseRequirements(courseId: string): string[] {

@@ -51,7 +51,7 @@
               <td *ngIf="this.sorting != 0">{{course.semester}}</td>
               <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
               <td class="grade" [class.no-grade-course]="getCourseGrade('c'+course.id) == 0" (click)="openGradeModal('c'+course.id)">{{getCourseGrade('c'+course.id) != 0 ? dataService.records['c'+course.id].grade : "+"}}</td>
-              <td [ngbTooltip]="isMeetingRequirements('c'+course.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+course.id)}" container="body" [class.course-pass]="getCourseGrade('c'+course.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+course.id)">{{course.title}}</td>
+              <td [ngbTooltip]="isMeetingRequirements('c'+course.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+course.id)}" container="body" (click)="openCourseOffcanvas('c'+course.id)" [class.course-pass]="getCourseGrade('c'+course.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+course.id)">{{course.title}}</td>
               <td [ngbTooltip]="course.category != null ? moduleTooltipTemplate : null" [tooltipContext]="{modules: getModuleNames(course.category)}" container="body">
                 <ng-container *ngIf="course.category != null">
                   <span *ngFor="let category of course.category" class="module-button" [ngClass]="{'module-button-active': this.isCategorySelected(category, 'c'+course.id)}" (click)="this.selectCategory(category, 'c'+course.id)">{{category}}</span>
@@ -83,6 +83,23 @@
           <!-- <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button> -->
           <button type="button" class="btn btn-primary" (click)="setCourseGrade(gradeModalConfiguration.courseId, gradeModalConfiguration.courseGrade); modal.dismiss('Cross click')">Καταχώρηση</button>
         </div>
+  </ng-template>
+
+  <ng-template let-conf="conf" #courseOffcanvas>
+    <ng-container *ngIf="courseOffcanvasConfiguration as conf">
+      <div class="offcanvas-header">
+        <h5>{{conf.course.title}}</h5>
+      </div>
+      <div class="offcanvas-body">
+        <p>Εξάμηνο: {{conf.course.semester}} <span>({{conf.course.semesterType}})</span></p>
+        <p>{{conf.course.type === "obligatory" ? "Υποχρεωτικό" : conf.course.type=="obligatory-selective" ? "Υποχρεωτικό Επιλογής" : "Επιλογής"}}</p>
+        <!-- <p>Welcome to the offcanvas! {{course.title}}</p> -->
+        <p (click)="openGradeModal('c'+conf.course.id)">Βαθμός: {{getCourseGrade('c'+conf.course.id) != 0 ? dataService.records['c'+conf.course.id].grade : "+"}}</p>
+
+        <!-- Requirements Table -->
+        
+      </div>
+    </ng-container>
   </ng-template>
 
   <div *ngIf="viewEcts" class="ects-counter-container" [ngbPopover]="ectsPopoverTemplate" popoverClass="ects-popover" popoverTitle="Μετρητής ECTS" triggers="click" [autoClose]="'outside'">
