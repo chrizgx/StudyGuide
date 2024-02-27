@@ -104,6 +104,17 @@ export class AppComponent {
     return record != undefined ? record.grade : 0;
   }
 
+  setCourseGrade(courseId: string, grade: number): void {
+    let record: CourseRecord = this.dataService.records[courseId];
+    if (record == undefined) {
+      record = { id: this.dataService.data[courseId].id, grade: grade, selected: false, category: null };
+      this.dataService.records[courseId] = record;
+      return;
+    }
+
+    record.grade = grade;
+  }
+
   openGradeModal(courseId: string): void {
     this.gradeModalConfiguration.courseName = this.dataService.data[courseId].title;
     this.gradeModalConfiguration.courseId = courseId;
