@@ -139,7 +139,6 @@ export class AppComponent {
   // The course needs to meet at least one of the requirements
   isMeetingRequirements(courseId: string): boolean {
     if (this.dataService.data[courseId] === null) return false;
-    console.log("CHECK");
 
     let requirements = this.dataService.data[courseId].requirements;
     if (requirements.length === 0) return true;

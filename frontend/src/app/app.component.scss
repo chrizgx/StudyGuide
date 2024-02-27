@@ -46,6 +46,28 @@ th, td {
     border-bottom: 0.5px solid #392e30;
 }
 
+.grade {
+    text-align: center;
+    transition: 0.25s;
+}
+
+.grade:hover {
+    cursor:pointer;
+    color: var(--bs-primary);
+    transform: scale(1.1);
+}
+
+.no-grade-course {
+    opacity: 0.4;
+}
+
+tr:hover .no-grade-course, .no-grade-course:hover {
+    opacity: 1;
+    transform: scale(1.4);
+}
+
+
+
 .requirements-warning {
     color: var(--bs-warning);
 }
