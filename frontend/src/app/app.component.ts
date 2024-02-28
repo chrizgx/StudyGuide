@@ -52,9 +52,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.openCourseOffcanvas('c3335');
-    }, 1000);
+    
   }
 
   consoleLog(value: string) {
@@ -185,6 +183,23 @@ export class AppComponent {
 
     return false;
   }
+
+  // Based on the given course, return the courses that need it as a requirement
+  getCoursesNeededBy(courseId: string): Course[] | null {
+    if (this.dataService.data[courseId] === null) return null;
+    let id: number = this.dataService.data[courseId].id;
+    let data: Course[] = [];
+    for (let key in this.dataService.data) {
+      let course = this.dataService.data[key];
+      if (course.requirements.includes(id)) {
+        data.push(course);
+      }
+    }
+
+    return data.length > 0 ? data : null;
+  }
+
+
 
 
 }
