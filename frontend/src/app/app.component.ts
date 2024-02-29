@@ -199,7 +199,18 @@ export class AppComponent {
     return data.length > 0 ? data : null;
   }
 
+  // Get the courses that are assigned to a specific module
+  getModuleCourses(module: number): CourseRecord[] | null {
+    let data: CourseRecord[] = [];
+    for (let key in this.dataService.records) {
+      let record = this.dataService.records[key];
+      if (record.category === module) {
+        data.push(record);
+      }
+    }
 
+    return data.length > 0 ? data : null;
+  }
 
 
 }
