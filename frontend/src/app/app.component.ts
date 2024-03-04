@@ -34,7 +34,7 @@ export class AppComponent {
   viewSelectedCourses: boolean = false;
   viewCompleted: boolean = true;
   viewEcts: boolean = false;
-  sorting: 0 | 1 | 2 | 3 = 0;
+  sorting: 0 | 1 | 2 = 0;
   section: any = {};
   gradeModalConfiguration: any = {
     courseName: "",
