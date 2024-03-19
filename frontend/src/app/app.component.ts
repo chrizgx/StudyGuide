@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, inject } from '@angular/core';
+import { Component, Injector, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -29,6 +29,7 @@ export class AppComponent {
   filterService: FilterService = inject(FilterService);
   modalService: NgbModal = inject(NgbModal);
   offcanvasService: NgbOffcanvas = inject(NgbOffcanvas);
+  cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   title = 'frontend';
   viewSelectedCourses: boolean = false;
@@ -58,6 +59,12 @@ export class AppComponent {
 
   consoleLog(value: string) {
     console.log(value);
+  }
+
+  updateView(): void {
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    }, 10);
   }
 
   checkTableChildren(tableId: string): boolean {
