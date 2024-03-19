@@ -45,6 +45,10 @@ main {
     max-width: 18em;
 }
 
+.section-invisible {
+    display: none;
+}
+
 table {
     border-collapse: collapse;
     border: 0.5px solid #392e30;

@@ -60,6 +60,18 @@ export class AppComponent {
     console.log(value);
   }
 
+  checkTableChildren(tableId: string): boolean {
+    var table = document.getElementById(tableId);
+    if (table === null) return false;
+    var rows = table.getElementsByTagName('tr');
+    var count = 0;
+    for (var i = 0; i < rows.length; i++) {
+      count++;
+    }
+
+    return count <= 1 ? true : false;
+  }
+
   getTotalEcts(): number {
     let ects = 0;
     for (let key in this.dataService.records) {
