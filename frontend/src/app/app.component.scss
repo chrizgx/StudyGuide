@@ -65,6 +65,15 @@ th, td {
     border-bottom: 0.5px solid #392e30;
 }
 
+.minimal-column {
+    width: 5%;
+    white-space: nowrap;
+}
+
+.module-column {
+    width: 30%;
+}
+
 .grade {
     text-align: center;
     transition: 0.25s;

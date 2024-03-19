@@ -49,14 +49,14 @@
           <ng-container *ngIf="viewCompleted == true || getCourseGrade('c'+course.id) < 5">
             <ng-container *ngIf="viewSelectedCourses == false || isCourseSelected('c'+course.id)">
               <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
-                <td><input type="checkbox" class="form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
-                <td>{{course.id}}</td>
+                <td class="minimal-column"><input type="checkbox" class="form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
+                <td class="minimal-column">{{course.id}}</td>
                 <td *ngIf="viewEcts" class="ects">{{course.ects}}</td>
                 <td *ngIf="this.sorting != 0">{{course.semester}}</td>
                 <td *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
-                <td class="grade" [class.no-grade-course]="getCourseGrade('c'+course.id) == 0" (click)="openGradeModal('c'+course.id)">{{getCourseGrade('c'+course.id) != 0 ? dataService.records['c'+course.id].grade : "+"}}</td>
+                <td class="grade minimal-column" [class.no-grade-course]="getCourseGrade('c'+course.id) == 0" (click)="openGradeModal('c'+course.id)">{{getCourseGrade('c'+course.id) != 0 ? dataService.records['c'+course.id].grade : "+"}}</td>
                 <td [ngbTooltip]="isMeetingRequirements('c'+course.id) == true ? null : requirementsTooltipTemplate" [tooltipContext]="{courses: getCourseRequirements('c'+course.id)}" container="body" (click)="openCourseOffcanvas('c'+course.id)" [class.course-pass]="getCourseGrade('c'+course.id) >= 5" [class.requirements-warning]="!isMeetingRequirements('c'+course.id)">{{course.title}}</td>
-                <td [ngbTooltip]="course.category != null ? moduleTooltipTemplate : null" [tooltipContext]="{modules: getModuleNames(course.category)}" container="body">
+                <td class="minimal-column module-column" [ngbTooltip]="course.category != null ? moduleTooltipTemplate : null" [tooltipContext]="{modules: getModuleNames(course.category)}" container="body">
                   <ng-container *ngIf="course.category != null">
                     <span *ngFor="let category of course.category" class="module-button" [ngClass]="{'module-button-active': this.isCategorySelected(category, 'c'+course.id)}" (click)="this.selectCategory(category, 'c'+course.id)">{{category}}</span>
                   </ng-container>
