@@ -29,10 +29,10 @@
 
     </div>
 
-    <p style="color: white;">Sorting: {{this.sorting}}</p>
+    <!-- <p style="color: white;">Sorting: {{this.sorting}}</p> -->
 
     <div class="courses-container" *ngFor="let section of filterService.filters[this.sorting].sections" [id]="'t' + section.filterValue" [class.section-invisible]="checkTableChildren('t' + section.filterValue)">
-      <p class="container-title">{{ section.name }} <ng-container *ngIf="this.sorting==2"><span *ngIf="getModuleCourses(section.filterValue) as amount" [class.course-pass]="amount.length >= 5">{{amount.length}}/5</span></ng-container></p>
+      <h4 class="container-title">{{ section.name }} <ng-container *ngIf="this.sorting==2"><span *ngIf="getModuleCourses(section.filterValue) as amount" [class.course-pass]="amount.length >= 5">{{amount.length}}/5</span></ng-container></h4>
       <table class="table">
         <tr>
           <th></th>
