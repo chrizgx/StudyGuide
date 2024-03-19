@@ -62,8 +62,12 @@ export class AppComponent {
   }
 
   updateView(): void {
+    // Detach to make view update smoother
+    this.cdr.detach();
     setTimeout(() => {
+      // Update and reattach to keep functionality
       this.cdr.detectChanges();
+      this.cdr.reattach();
     }, 10);
   }
 
