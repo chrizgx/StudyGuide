@@ -54,7 +54,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    
+    //this.cdr.detach();
   }
 
   consoleLog(value: string) {
