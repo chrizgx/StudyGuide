@@ -50,7 +50,7 @@
             <ng-container *ngIf="viewSelectedCourses == false || isCourseSelected('c'+course.id)">
               <tr *ngIf="section.filterFunction(section.filterValue, course)" style="color: white">
                 <td class="minimal-column"><input type="checkbox" class="cursor-pointer form-check-input" [checked]="isCourseSelected('c' + course.id)" (click)="selectCourse('c'+course.id)" readonly></td>
-                <td class="cursor-pointer minimal-column">{{course.id}}</td>
+                <td class="cursor-pointer minimal-column" (click)="openCourseOffcanvas('c'+course.id)">{{course.id}}</td>
                 <td class="ects minimal-column" *ngIf="viewEcts">{{course.ects}}</td>
                 <td class="minimal-column" *ngIf="this.sorting != 0">{{course.semester}}</td>
                 <td class="minimal-column" *ngIf="this.sorting == 2">{{course.semesterType == "summer" ? "Εαρινό" : "Χειμερινό"}}</td>
