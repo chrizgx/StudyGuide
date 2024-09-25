@@ -71,6 +71,7 @@ table {
 
 th {
     background-color: #261e1c;
+    cursor: default;
 }
 
 th, td {
@@ -78,6 +79,14 @@ th, td {
     padding: 0.8em;
     border-top: 0.5px solid #392e30;
     border-bottom: 0.5px solid #392e30;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .minimal-column {
